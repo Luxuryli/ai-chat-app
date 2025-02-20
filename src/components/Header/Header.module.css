@@ -1,0 +1,32 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: var(--background-color);
+    color: var(--text-color);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    position: static;
+}
+
+.head {
+    font-size: medium;
+    font-weight: bold;
+}
+
+.toggleButton {
+    padding: 8px 15px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    background: transparent;
+    color: var(--text-color);
+    border: var(--text-color);
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.toggleButton:hover {
+    background: var(--text-color);
+    color: var(--background-color);
+}
