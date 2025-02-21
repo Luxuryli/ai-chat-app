@@ -1,7 +1,8 @@
 import inputer from "../InputField/InputField.module.css"; 
+
 import { useRef, useEffect } from "react";
 
-const InputField = ({ value, onChange, placeholder }) => {
+const InputField = ({ value, onChange, placeholder, onSend }) => {
   const textareaRef = useRef(null);
 
   const resizeTextarea = () => {
@@ -21,14 +22,16 @@ const InputField = ({ value, onChange, placeholder }) => {
   }, [value]);
 
   return (
-    <textarea
-      ref={textareaRef}
-      className={inputer.inputBox}
-      value={value}
-      onChange={handleInput}
-      placeholder={placeholder}
-      rows={1}
-    />
+      <div className={inputer.inputContainer}>
+      <textarea
+        ref={textareaRef}
+        className={inputer.inputBox}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        rows={1}
+      />
+    </div>
   );
 };
 

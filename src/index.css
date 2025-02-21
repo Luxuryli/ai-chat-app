@@ -73,6 +73,11 @@ textarea {
 }
 
 
+.loadingIndicator {
+  font-weight: bold;
+  color: var(--output-text);
+}
+
 .translator {
   color: var(--translated-text);
   font-weight: bold;

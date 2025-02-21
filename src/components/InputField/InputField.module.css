@@ -15,3 +15,15 @@
     transition: background 0.3s, color 0.3s;
 }
 
+.inputContainer {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+
+
+
+
+
