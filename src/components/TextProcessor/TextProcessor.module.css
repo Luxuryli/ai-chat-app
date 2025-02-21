@@ -3,7 +3,7 @@
     flex-direction: column;
     width: 100%;
     height: 92.7vh;
-    padding: 0px 30px;
+    padding: 0px 50px;
     box-sizing: border-box;
     justify-content: flex-end;
     color: var(--text-color);
@@ -28,7 +28,7 @@
     color: var(--output-text);
     padding: 10px;
     border-radius: 5px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     transition: background 0.3s, color 0.3s;
     background-color: var(--output-bg);
     padding: 20px;
@@ -74,6 +74,11 @@
     padding: 20px;
 }
 
+.language {
+    display: flex;
+    color: var(--summary-text);
+}
+
 .but {
     display: flex;
     justify-content: space-between;
@@ -94,16 +99,38 @@
     width: 100%;
 }
 
+.theme {
+    --radius: 0.5em;
+    --baseFg: blue;
+    --baseBg: navy;
+    --accentFg: aliceblue;
+    --accentBg: blue;
+}
+
 .translateDropdown select {
-    padding: 20px 20px;
+    padding-left: 0.8em;
     border-radius: 6px;
     border: 1px solid var(--border-color);
     background-color: navy;
-    color: var(--text-color);
+    color: aliceblue;
     cursor: pointer;
-    width: 60%;
+    width: 125.69px;
     font-size: 1em;
     font-weight: 500;
+    -webkit-appearance: none;
+    appearance: none;
+    /* border: 1px solid var(--baseFg); */
+    line-height: 1;
+    outline: 0;
+    border-radius: var(--radius);
+    background-color: var(--baseBg);
+    background-image: linear-gradient(var(--baseFg), var(--baseFg)),
+            linear-gradient(-135deg, transparent 50%, var(--accentBg) 50%),
+            linear-gradient(-225deg, transparent 50%, var(--accentBg) 50%),
+            linear-gradient(var(--accentBg) 42%, var(--accentFg) 42%);
+    background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+    background-size: 1px 100%, 20px 22px, 20px 22px, 20px 100%;
+    background-position: right 20px center, right bottom, right bottom, right bottom;
 }
 
 .translateDropdown select:focus {
@@ -114,4 +141,33 @@
 .translateDropdown option {
     background-color: var(--output-bg);
     color: var(--text-color);
+}
+
+@media screen and (max-width: 760px) {
+    .controls {
+            display: flex;
+            flex-direction: column;
+            justify-content: right;
+            gap: 10px;
+        }
+
+        .translator,
+        .summarizer {
+            color: var(--summary-text);
+            font-style: italic;
+            margin-top: 20px;
+            padding-top: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            border-top: solid 0.5px;
+            font-size: medium;
+        }
+
+        .original {
+            font-weight: 500;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            font-size: medium;
+        }
 }

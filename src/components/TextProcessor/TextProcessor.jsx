@@ -85,33 +85,50 @@ const TextProcessor = () => {
   };
 
   const handleTranslate = async (messageId, targetLang) => {
-    const message = messages.find((msg) => msg.id === messageId);
+  const message = messages.find((msg) => msg.id === messageId);
+  if (!message) return;
 
-    if (message.translations.some((t) => t.lang === targetLang)) {
-      setIsDropdownOpen(null);
-      return;
+  try {
+    console.log(`🔍 Checking if ${targetLang} is supported...`);
+    
+    const translator = await self.ai.translator.create({
+      sourceLanguage: "en",
+      targetLanguage: targetLang,
+    });
+
+    if (!translator) {
+      throw new Error("Translator initialization failed.");
     }
 
-    try {
-      const translatedTextResult = await translateText(message.text, targetLang);
-      const targetLangName = languages.find((lang) => lang.code === targetLang)?.name || "Unknown Language";
+    const translatedTextResult = await translator.translate(message.text);
+    console.log("📡 API Response:", translatedTextResult);
 
-      setMessages((prevMessages) =>
-        prevMessages.map((msg) =>
-          msg.id === messageId
-            ? {
-                ...msg,
-                translations: [...msg.translations, { lang: targetLang, name: targetLangName, text: translatedTextResult }],
-              }
-            : msg
-        )
-      );
-
-      setIsDropdownOpen(null);
-    } catch (error) {
-      setErrorMessage("An error occurred while translating.");
+    if (!translatedTextResult) {
+      throw new Error(`Translation to ${targetLang} failed. API returned an empty response.`);
     }
-  };
+
+    const targetLangName = languages.find((lang) => lang.code === targetLang)?.name || "Unknown Language";
+
+    setMessages((prevMessages) =>
+      prevMessages.map((msg) =>
+        msg.id === messageId
+          ? {
+              ...msg,
+              translations: [
+                ...msg.translations,
+                { lang: targetLang, name: targetLangName, text: translatedTextResult },
+              ],
+            }
+          : msg
+      )
+    );
+
+    setIsDropdownOpen(null);
+  } catch (error) {
+    console.error("⚠️ Translation error:", error);
+    setErrorMessage(`Translation to ${targetLang} failed. Please try again.`);
+  }
+};
 
   const resetTextareaSize = () => {
     if (textareaRef.current) {
@@ -151,7 +168,10 @@ const TextProcessor = () => {
             </div>
 
             <div className={design.controls}>
-              <p className={design.language}><strong>Detected Language:</strong> {msg.detectedLanguage}</p>
+              <p className={design.language}>
+              <strong>Detected Language:</strong>{" "}
+              {languages.find((lang) => lang.code.toLowerCase() === msg.detectedLanguage.toLowerCase())?.name || "Unknown"}
+            </p>
 
               <div className={design.butt}>
                 {msg.text.split(" ").length >= 150 && (
@@ -162,7 +182,7 @@ const TextProcessor = () => {
               <select
                   onChange={(e) => handleTranslate(msg.id, e.target.value)}
                 value=""
-              >
+              className={design.theme}>
               <option value="" disabled>Translate</option>
                 {languages.map((lang) => (
                   <option key={lang.code} value={lang.code}>

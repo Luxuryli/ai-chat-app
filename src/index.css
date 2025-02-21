@@ -21,7 +21,7 @@
   --background-color: rgb(3, 3, 27);
   --input-bg: #1a1a2e;
   --input-text: #ffffff;
-  --output-bg: #222;
+  --output-bg: #4b6c6276;
   --output-text: #ddd;
   --summary-text: #66a3ff;
   --translated-text: #80c080;
@@ -94,6 +94,11 @@ button:hover {
   color: #fff;
 }
 
+
+.language {
+    color: var(--summary-text);
+    font-weight: bold;
+}
 
 button:focus,
 input:focus,
