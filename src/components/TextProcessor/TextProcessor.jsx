@@ -150,24 +150,10 @@ const TextProcessor = () => {
       <div className={design.chat}>
         {messages.map((msg) => (
           <div key={msg.id} className={design.messageContainer}>
-            <div className={design.texting}>
-              <p className={design.original}>{msg.text}</p>
-              {msg.translations.length > 0 && (
-                <div className={design.translations}>
-                  {msg.translations.map((t, index) => (
-                    <p key={index} className={design.translator}>
-                      <strong>{t.name}:</strong> {t.text}
-                    </p>
-                  ))}
-                </div>
-              )}
 
-              {msg.summary && (
-                <p className={design.summarizer}><strong>Summary:</strong> {msg.summary}</p>
-              )}
-            </div>
-
-            <div className={design.controls}>
+        <div className={design.texting}>
+            <p className={design.original}>{msg.text}</p>
+                    <div className={design.controls}>
               <p className={design.language}>
               <strong>Detected Language:</strong>{" "}
               {languages.find((lang) => lang.code.toLowerCase() === msg.detectedLanguage.toLowerCase())?.name || "Unknown"}
@@ -194,6 +180,32 @@ const TextProcessor = () => {
                 
               </div>
             </div>
+        </div>
+
+
+
+{(msg.translations.length > 0 || msg.summary) && (
+  <div className={design.additionalInfo}>
+    {msg.translations.length > 0 && (
+      <div className={design.translations}>
+        {msg.translations.map((t, index) => (
+          <p key={index} className={design.translator}>
+            <strong>{t.name}:</strong> {t.text}
+          </p>
+        ))}
+      </div>
+    )}
+
+
+    {msg.summary && (
+      <p className={design.summarizer}>
+        <strong>Summary:</strong> {msg.summary}
+      </p>
+    )}
+  </div>
+)}
+
+
           </div>
         ))}
       </div>
