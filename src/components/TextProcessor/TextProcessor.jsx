@@ -189,7 +189,7 @@ const TextProcessor = () => {
             )}
 
             {msg.summary && (
-              <div className={design.additionalInfo}>
+              <div className={design.additionalInfoo}>
                 <p className={design.summarizer}><strong>Summary:</strong> {msg.summary}</p>
               </div>
             )}

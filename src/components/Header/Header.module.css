@@ -30,3 +30,9 @@
     background: var(--text-color);
     color: var(--background-color);
 }
+
+@media screen and (max-width: 500px) {
+    .header {
+        padding: 15px 25px;
+    }
+}
