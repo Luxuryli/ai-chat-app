@@ -1,7 +1,7 @@
 export async function summarizeText(text) {
   if (!window.ai) {
     console.error("AI API is NOT available.");
-    return "AI API not available";
+    return "AI is tired, Cannot summarize";
   }
 
   try {
@@ -16,7 +16,7 @@ export async function summarizeText(text) {
 export async function translateText(text, targetLang = "fr") {
   if (!window.ai) {
     console.error("AI API is NOT available.");
-    return "AI API not available";
+    return "AI is tired, cannot translate";
   }
 
   try {
@@ -43,7 +43,7 @@ export async function translateText(text, targetLang = "fr") {
 export async function detectLanguage(text) {
   if (!window.ai) {
     console.error("AI API is NOT available.");
-    return "AI API not available";
+    return "AI is tired, cannot detect Language";
   }
 
   if (!text.trim()) {
