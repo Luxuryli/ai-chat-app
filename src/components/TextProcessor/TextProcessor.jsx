@@ -173,18 +173,18 @@ const TextProcessor = () => {
               </div>
             )}
 
+            {loadingSummaryId === msg.id && (
+              <div className={design.loadingIndicator}>
+                <FaSpinner className={design.spinner} />
+                <span className={design.fun}>Wait ooo, I dey come...</span>
+              </div>
+            )}
+
             {(msg.translations.length > 0 || msg.summary) && (
               <div className={design.additionalInfo}>
                 {msg.translations.length > 0 && msg.translations.map((t, index) => (
                   <p key={index} className={design.translator}><strong>{t.name}:</strong> {t.text}</p>
                 ))}
-              </div>
-            )}
-
-            {loadingSummaryId === msg.id && (
-              <div className={design.loadingIndicator}>
-                <FaSpinner className={design.spinner} />
-                <span className={design.fun}>Wait ooo, I dey come...</span>
               </div>
             )}
 
